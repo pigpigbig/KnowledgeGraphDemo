@@ -2812,7 +2812,7 @@ function render_nodes(cy_graph, siblings, fisheye_fn_instance, normalWidth, node
               let curr_node = siblings[i];
               let x0 = fisheye_fn_instance(i * normalWidth),
               x1 = fisheye_fn_instance((i + 1) * normalWidth),
-              new_node_width = (Math.min(nodeWidth, x1 - x0))/new_node_width_dividend;
+              new_node_width = Math.max((Math.min(nodeWidth, x1 - x0))/new_node_width_dividend, normalWidth*0.7);
 
               //console.log('new node width', new_node_width)
               cy_graph.nodes(`[id = "${siblings[i]}-fisheye"]`).ungrabify()
@@ -2822,9 +2822,9 @@ function render_nodes(cy_graph, siblings, fisheye_fn_instance, normalWidth, node
                     'font-size': .2 * new_node_width
               });
 
-              cy_graph.nodes(`[id = "${siblings[i]}-fisheye"]`).position({
-                x: first_x_pos+normalWidth*i,
-              })
+              // cy_graph.nodes(`[id = "${siblings[i]}-fisheye"]`).position({
+              //   x: first_x_pos+normalWidth*i,
+              // })
 
           }
 
@@ -2906,11 +2906,6 @@ function add_fisheye_effect(cy_graph, siblings, first_x_pos) {
         
       });
 
-      cy_graph.on('mouseout', function(evt) {
-        desiredDistortion = 10;
-        move();
-      });
-      
       
       function move() {
 
