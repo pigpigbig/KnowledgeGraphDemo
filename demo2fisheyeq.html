@@ -2815,13 +2815,17 @@ function render_nodes(cy_graph, siblings, fisheye_fn_instance, normalWidth, node
               new_node_width = (Math.min(nodeWidth, x1 - x0))/new_node_width_dividend;
 
               //console.log('new node width', new_node_width)
+              cy_graph.nodes(`[id = "${siblings[i]}-fisheye"]`).ungrabify()
+
               cy_graph.nodes(`[id = "${siblings[i]}-fisheye"]`).style({
                     'width': new_node_width,
                     'font-size': .2 * new_node_width
               });
 
-              cy_graph.nodes(`[id = "${siblings[i]}"]`)[0]._private.position.x = 0
-              
+              cy_graph.nodes(`[id = "${siblings[i]}-fisheye"]`).position({
+                x: first_x_pos+normalWidth*i,
+              })
+
           }
 
 }
@@ -2880,7 +2884,6 @@ function add_fisheye_effect(cy_graph, siblings, first_x_pos) {
         } else {
           //we've moved out of the canvas so it's mimicking the mouseout function
           curr_place = 'background';
-          desiredDistortion = 0;
           //mousemove() function
           x_pos_on_canvas = (evt.position.x - first_x_pos);
           //desiredFocus = Math.max(0, Math.min(canvas_width, x_pos_on_canvas));
@@ -2901,7 +2904,12 @@ function add_fisheye_effect(cy_graph, siblings, first_x_pos) {
           move();
         }
         
-      })
+      });
+
+      cy_graph.on('mouseout', function(evt) {
+        desiredDistortion = 10;
+        move();
+      });
       
       
       function move() {
