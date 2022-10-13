@@ -44,7 +44,9 @@
       #nav-up,
       #nav-down,
       #nav-left,
-      #nav-right{
+      #nav-right,
+      #nav-down-left,
+      #nav-down-right{
         border-radius: 50px;
         background-color: white;
         font-weight: 600;
@@ -2106,19 +2108,19 @@
                   
 
                   <div style="display:flex; position: center;">
-                    <button id='nav-down-left' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; text-align:right; width:33.3%">
+                    <button id='nav-down-left' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; text-align:right">
                       <span id = 'nav-down-left-arrow' style="font-size:15px; color:${down_left_head_color}">\u25E3</span> 
                       <br>
                       <span id = 'nav-down-left-text' style="font-size:15px; color:${down_left_head_color}; margin-right: 20px; font-weight: bold;">${left_child_name}   </span> 
                     </button>
     
-                    <button id='nav-down' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; width:33.3%"> 
+                    <button id='nav-down' class="nav-buttons" type="button" style="display: inline-block; border-width:0px"> 
                       <span id = 'nav-down-arrow' style="font-size:15px; color:${down_arrow_head_color}">\u25BC</span> 
                       <br>
                       <span id = 'nav-down-text' style="font-size:15px; color:${down_arrow_head_color}">${first_child_name}</span> 
                     </button>      
 
-                    <button id='nav-down-right' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; position: relative; text-align:left; width:33.3%">
+                    <button id='nav-down-right' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; position: relative; text-align:left">
                       <span id = 'nav-down-right-arrow' style="font-size:15px; color:${down_right_head_color}">\u25E2</span> 
                       <br>
                       <span id = 'nav-down-right-text' style="font-size:15px;  color:${down_right_head_color}; margin-left: 20px; font-weight: bold;">   ${right_child_name}</span> 
@@ -2134,7 +2136,6 @@
            //now we need to add different hover events based on what places we can actually move to
            let idx = 0;
            relationships.forEach(curr_relationship_id => {
-              console.log(curr_relationship_id)
               let curr_arrow_color = arrow_head_colors[idx];
               let nav_btn;
               if (curr_arrow_color != 'white') {
@@ -2175,7 +2176,7 @@
                 document.getElementById("nav-right").style.width = `${new_width}px`;
            }
 
-           return [first_child, left_sibling, right_sibling, curr_parent]
+           return [first_child, left_sibling, right_sibling, curr_parent, left_child, right_child]
       }
 
       //only want this function to perform the query if we select a non-rank node
@@ -2184,13 +2185,12 @@
        parent_and_all_children, nodes_we_came_from) {
 
             let four_relationships_qvals = display_nav_buttons(node_qval, graphType_pc_edges, taxon_qvals, parent_and_all_children);
-            let relationships = ["nav-down", "nav-left", "nav-right", "nav-up"];
+            let relationships = ["nav-down", "nav-left", "nav-right", "nav-up", "nav-down-left", "nav-down-right"];
             //relationships needs to be in the same order as is returned by the function display nav buttons
             let idx = 0;
             //adding click events for the navigation buttons
             four_relationships_qvals.forEach(qval => {
                 let nodes_lst = [];
-
                 let curr_relationship_id = relationships[idx];
                 if (curr_relationship_id == "nav-up") {
                   nodes_lst = [...nodes_we_came_from]
@@ -3533,7 +3533,7 @@
           //so we want the functionality of the nav buttons to be different from the one when we are in
           //property display mode
           let four_relationships_qvals = display_nav_buttons(given_taxon, graphType_pc_edges, taxon_qvals, parent_and_all_children);
-          let relationships = ["nav-down", "nav-left", "nav-right", "nav-up"];
+          let relationships = ["nav-down", "nav-left", "nav-right", "nav-up", "nav-down-left", "nav-down-right"];
           //relationships needs to be in the same order as is returned by the function display nav buttons
           let idx = 0;
           //adding click events for the navigation buttons
