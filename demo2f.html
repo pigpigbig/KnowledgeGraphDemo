@@ -2058,11 +2058,7 @@
         }
 
         if (children != undefined && children.length > 0) {
-          if (children[1] != undefined) {
-            first_child = children[1];
-          } else {
-            first_child = children[0];
-          }
+          first_child = children[0];
           first_child_name = taxon_qvals[first_child];
           down_arrow_head_color = 'rgb(0, 170, 255)';
           idx_of_curr_child = children.indexOf(first_child);
@@ -2107,20 +2103,20 @@
                    </div>
                   
 
-                  <div style="display:flex; position: center;">
-                    <button id='nav-down-left' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; text-align:right">
+                  <div style="display:flex">
+                    <button id='nav-down-left' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; text-align:right; width:33%">
                       <span id = 'nav-down-left-arrow' style="font-size:15px; color:${down_left_head_color}">\u25E3</span> 
                       <br>
                       <span id = 'nav-down-left-text' style="font-size:15px; color:${down_left_head_color}; margin-right: 20px; font-weight: bold;">${left_child_name}   </span> 
                     </button>
     
-                    <button id='nav-down' class="nav-buttons" type="button" style="display: inline-block; border-width:0px"> 
+                    <button id='nav-down' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; width:33%"> 
                       <span id = 'nav-down-arrow' style="font-size:15px; color:${down_arrow_head_color}">\u25BC</span> 
                       <br>
                       <span id = 'nav-down-text' style="font-size:15px; color:${down_arrow_head_color}">${first_child_name}</span> 
                     </button>      
 
-                    <button id='nav-down-right' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; position: relative; text-align:left">
+                    <button id='nav-down-right' class="nav-buttons" type="button" style="display: inline-block; border-width:0px; position: relative; text-align:left; width:33%">
                       <span id = 'nav-down-right-arrow' style="font-size:15px; color:${down_right_head_color}">\u25E2</span> 
                       <br>
                       <span id = 'nav-down-right-text' style="font-size:15px;  color:${down_right_head_color}; margin-left: 20px; font-weight: bold;">   ${right_child_name}</span> 
